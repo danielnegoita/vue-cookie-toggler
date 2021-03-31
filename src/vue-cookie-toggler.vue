@@ -1,43 +1,50 @@
 <template>
   <div>
-    <gdpr-modal v-if="!showMoreInfoTab" :toggle-modal="toggleModal">
-      <template #header> Review our cookie policy </template>
+    <gdpr-modal v-if="!isSettings" :toggle-modal="toggleModal">
+      <template #header> {{ title }} </template>
 
-      <p>
-        Use cookies that are essential to the operation of our websites. These
-        cookies are strictly necessary to provide you with services available on
-        our websites and to use some of its features.
-      </p>
+      <div>
+        <slot />
+      </div>
 
       <enable-cookies-alert />
 
       <template #footer>
-        <button
-          type="button"
-          class="cookie-consent_modal__button cookie-consent_modal__button-default"
-          @click="showMoreInfoTab = true"
+        <slot
+          name="mainButtons"
+          :settings="showSettings"
+          :accept="allowAll"
+          :save="saveSettings"
+          :cancel="closeModal"
         >
-          More information
-        </button>
-        <button
-          type="button"
-          class="cookie-consent_modal__button cookie-consent_modal__button-primary"
-          @click="allowAll"
-        >
-          Accept cookies
-        </button>
+          <button
+            type="button"
+            class="cookie-consent_modal__button cookie-consent_modal__button-default"
+            @click="showSettings"
+          >
+            {{ settingsLabel }}
+          </button>
+
+          <button
+            type="button"
+            class="cookie-consent_modal__button cookie-consent_modal__button-primary"
+            @click="allowAll"
+          >
+            {{ acceptLabel }}
+          </button>
+        </slot>
       </template>
     </gdpr-modal>
 
     <gdpr-modal v-else :toggle-modal="toggleModal">
-      <template #header> Your privacy options </template>
+      <template #header>
+        <template v-if="settingsTitle">{{ settingsTitle }}</template>
+        <template v-else>{{ title }}</template>
+      </template>
 
-      <p>
-        Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae
-        luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing,
-        commodo quis, gravida id, est. Sed lectus. Praesent elementum hendrerit
-        tortor. Sed semper lorem at felis.
-      </p>
+      <div>
+        <slot name="settingsContent" />
+      </div>
 
       <enable-cookies-alert />
 
@@ -47,20 +54,28 @@
       />
 
       <template #footer>
-        <button
-          type="button"
-          class="cookie-consent_modal__button cookie-consent_modal__button-default"
-          @click="allowAll"
+        <slot
+          name="settingsButtons"
+          :settings="showSettings"
+          :accept="allowAll"
+          :save="saveSettings"
+          :cancel="closeModal"
         >
-          Allow all
-        </button>
-        <button
-          type="button"
-          class="cookie-consent_modal__button cookie-consent_modal__button-primary"
-          @click="saveConsent"
-        >
-          Save settings
-        </button>
+          <button
+            type="button"
+            class="cookie-consent_modal__button cookie-consent_modal__button-default"
+            @click="allowAll"
+          >
+            {{ acceptLabel }}
+          </button>
+          <button
+            type="button"
+            class="cookie-consent_modal__button cookie-consent_modal__button-primary"
+            @click="saveSettings"
+          >
+            {{ saveLabel }}
+          </button>
+        </slot>
       </template>
     </gdpr-modal>
   </div>
@@ -113,6 +128,41 @@ export default {
       },
     },
 
+    title: {
+      type: String,
+      required: true,
+    },
+
+    settingsTitle: {
+      type: String,
+      required: false,
+      default: null,
+    },
+
+    settingsLabel: {
+      type: String,
+      required: false,
+      default: 'Customize settings',
+    },
+
+    acceptLabel: {
+      type: String,
+      required: false,
+      default: 'Accept all cookies',
+    },
+
+    saveLabel: {
+      type: String,
+      required: false,
+      default: 'Save settings',
+    },
+
+    cancelLabel: {
+      type: String,
+      required: false,
+      default: 'Cancel',
+    },
+
     /**
      * comma separated routes
      * ex: <vue-cookie-toggler exclude-pages="/terms, /privacy-policy"></vue-cookie-toggler>
@@ -127,7 +177,7 @@ export default {
   data() {
     return {
       toggleModal: false,
-      showMoreInfoTab: false,
+      isSettings: false,
       cookies: this.hasConsent() ? this.getConsent() : this.cookiesGroups,
     };
   },
@@ -178,14 +228,22 @@ export default {
       return gdprService.hasConsent();
     },
 
+    closeModal() {
+      this.toggleModal = !this.toggleModal;
+    },
+
+    showSettings() {
+      this.isSettings = true;
+    },
+
     allowAll() {
       forEach(this.cookies, (cookie) => {
         cookie.allowed = true;
       });
-      this.saveConsent();
+      this.saveSettings();
     },
 
-    saveConsent() {
+    saveSettings() {
       gdprService.saveConsent(this.cookies);
 
       this.toggleModal = false;
@@ -238,7 +296,7 @@ export default {
 
       forEach(elements, (elem) => {
         elem.addEventListener('click', () => {
-          this.showMoreInfoTab = true;
+          this.isSettings = true;
           this.toggleModal = true;
         });
       });
