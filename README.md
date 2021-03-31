@@ -36,7 +36,7 @@ Then you can use it in your app like this (see a complete example below):
 ```
 
 `cookiesGroups` example:
-```json
+```js
 [
   {
     category: 'essential',
