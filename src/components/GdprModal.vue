@@ -106,7 +106,7 @@ $boder-radius: 5px;
     text-align: right;
   }
 
-  .cookie-consent_modal__button {
+  .vct__btn {
     padding: 12px 24px;
     margin-right: 10px;
     border-radius: $boder-radius;
@@ -128,7 +128,7 @@ $boder-radius: 5px;
     }
   }
 
-  .cookie-consent_modal__button-default {
+  .vct__btn--default {
     background: none;
     border: 2px solid $button-default;
     color: #142f47;
@@ -138,7 +138,7 @@ $boder-radius: 5px;
     }
   }
 
-  .cookie-consent_modal__button-primary {
+  .vct__btn--primary {
     background-color: $button-primary;
     color: #ffffff;
 

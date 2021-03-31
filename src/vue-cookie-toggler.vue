@@ -19,7 +19,7 @@
         >
           <button
             type="button"
-            class="cookie-consent_modal__button cookie-consent_modal__button-default"
+            class="vct__btn vct__btn--default"
             @click="showSettings"
           >
             {{ settingsLabel }}
@@ -27,7 +27,7 @@
 
           <button
             type="button"
-            class="cookie-consent_modal__button cookie-consent_modal__button-primary"
+            class="vct__btn vct__btn--primary"
             @click="allowAll"
           >
             {{ acceptLabel }}
@@ -63,14 +63,14 @@
         >
           <button
             type="button"
-            class="cookie-consent_modal__button cookie-consent_modal__button-default"
+            class="vct__btn vct__btn--default"
             @click="allowAll"
           >
             {{ acceptLabel }}
           </button>
           <button
             type="button"
-            class="cookie-consent_modal__button cookie-consent_modal__button-primary"
+            class="vct__btn vct__btn--primary"
             @click="saveSettings"
           >
             {{ saveLabel }}
