@@ -38,7 +38,7 @@
   "dependencies": {
     "lodash": "^4.17.21",
     "postscribe": "^2.0.8",
-    "vue-js-modal": "^2.0.0-rc.6",
+    "vue-js-modal": "^1.3.34",
     "vue-switches": "^2.0.1",
     "vue2-collapse": "^1.0.15"
   },
