@@ -1,11 +1,6 @@
 <script>
 import Vue from 'vue';
-import VModal from 'vue-js-modal';
-import VueCollapse from 'vue2-collapse';
 import VueCookieToggler from '@/vue-cookie-toggler.vue';
-
-Vue.use(VueCollapse);
-Vue.use(VModal, { componentName: 'vue-cookie-toggler-modal' });
 
 export default Vue.extend({
   name: 'ServeDev',

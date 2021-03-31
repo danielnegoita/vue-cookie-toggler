@@ -69,9 +69,11 @@
 <script>
 import parsers from '@/parsers';
 import gdprService from '@/services/gdprService';
-import GdprModal from '@/components/GdprModal.vue';
-import GdprCookiesListing from '@/components/GdprCookiesListing';
-import EnableCookiesAlert from '@/components/EnableCookiesAlert';
+import {
+  GdprModal,
+  GdprCookiesListing,
+  EnableCookiesAlert,
+} from '@/components';
 import {
   has,
   forEach,
