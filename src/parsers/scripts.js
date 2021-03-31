@@ -8,7 +8,7 @@ Example 1:
 
 Example 2:
 <script type="text/plain" data-cookie data-category="essential">
-    // .. you're awesome code here
+    // .. youre awesome code here
 </script>
 
 Params:

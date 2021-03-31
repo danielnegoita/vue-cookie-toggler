@@ -8,12 +8,12 @@
     <v-collapse-group :only-one-active="true">
       <v-collapse-wrapper
         v-for="cookieGroup in cookiesGroups"
-        :key="cookieGroup.name"
+        :key="cookieGroup.category"
         @onStatusChange="toggleActiveClass"
       >
         <div class="cookie-item">
           <div
-            :id="`cookieHeading_${cookieGroup.name}`"
+            :id="`cookieHeading_${cookieGroup.category}`"
             class="cookie-item__heading"
             role="tab"
           >
@@ -22,14 +22,14 @@
                 class="cookie-item__title-img"
                 src="data:image/svg+xml;utf8,<svg viewBox='0 0 140 140' width='10' height='10' xmlns='http://www.w3.org/2000/svg'><g><path d='m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z' fill='7A8990'/></g></svg>"
               />
-              {{ cookieGroup.title }}
+              {{ cookieGroup.name }}
             </h4>
             <switches
               :emit-on-mount="false"
-              :value="cookieGroup.allowed"
+              :value="isActive(cookieGroup)"
               theme="custom"
               color="blue"
-              :disabled="cookieGroup.disabled"
+              :disabled="isRequired(cookieGroup)"
               @input="toggleCookieGroupConsent(cookieGroup)"
             ></switches>
           </div>
@@ -46,15 +46,14 @@
 </template>
 
 <script>
+import { get } from 'lodash';
 import Switches from 'vue-switches';
-// import VueCollapse from 'vue2-collapse';
 
 export default {
   name: 'GdprCookiesListing',
 
   components: {
     Switches,
-    // VueCollapse
   },
 
   props: {
@@ -67,6 +66,14 @@ export default {
   },
 
   methods: {
+    isActive(cookieGroup) {
+      return get(cookieGroup, 'active', false);
+    },
+
+    isRequired(cookieGroup) {
+      return get(cookieGroup, 'required', false);
+    },
+
     toggleCookieGroupConsent(cookieGroup) {
       this.$emit('tooggle-cookie-group-consent', cookieGroup);
     },

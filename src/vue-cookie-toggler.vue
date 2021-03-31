@@ -114,11 +114,10 @@ export default {
         return groups.every((group) => {
           return (
             isObject(group) &&
+            has(group, 'category') &&
             has(group, 'name') &&
-            has(group, 'title') &&
             has(group, 'description') &&
-            has(group, 'allowed') &&
-            has(group, 'disabled')
+            has(group, 'active')
           );
         });
       },
@@ -234,7 +233,7 @@ export default {
 
     allowAll() {
       forEach(this.cookies, (cookie) => {
-        cookie.allowed = true;
+        cookie.active = true;
       });
       this.saveSettings();
     },
@@ -252,7 +251,7 @@ export default {
     },
 
     updateCookieGroupConsent(cookieGroup) {
-      cookieGroup.allowed = !cookieGroup.allowed;
+      cookieGroup.active = !cookieGroup.active;
     },
 
     blockCookies() {
@@ -261,24 +260,24 @@ export default {
     },
 
     enableCookies() {
-      parsers.enable(this.getAllowedCategories());
+      parsers.enable(this.getActiveCategories());
     },
 
     updateCookies() {
-      parsers.update(this.getAllowedCategories());
+      parsers.update(this.getActiveCategories());
       this.initListeners();
     },
 
-    getAllowedCategories() {
-      let allowedCategories = [];
+    getActiveCategories() {
+      let activeCategories = [];
 
       forEach(this.getConsent(), (cookie) => {
-        if (cookie.allowed) {
-          allowedCategories.push(cookie.name);
+        if (cookie.active) {
+          activeCategories.push(cookie.category);
         }
       });
 
-      return allowedCategories;
+      return activeCategories;
     },
 
     /**
