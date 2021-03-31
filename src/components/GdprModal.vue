@@ -98,6 +98,9 @@ $boder-radius: 5px;
   }
 
   .cookie-consent_modal__footer {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
     border: 0;
     margin-top: 25px;
     text-align: right;
@@ -108,12 +111,13 @@ $boder-radius: 5px;
     margin-right: 10px;
     border-radius: $boder-radius;
     border: 1px solid transparent;
-    line-height: 14px;
+    line-height: 16px;
     font-size: 14px;
     font-family: $font-family;
     white-space: nowrap;
     vertical-align: middle;
     cursor: pointer;
+    white-space: normal;
 
     &:nth-last-child(1) {
       margin-right: 0;
