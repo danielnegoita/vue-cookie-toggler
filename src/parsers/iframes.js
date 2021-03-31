@@ -1,15 +1,15 @@
 /*
 Usage:
 <iframe
+    data-cookie
     data-src="https://www.youtube.com"
-    data-cookie="true"
     data-category="analytics"
     data-placeholder="true"
     alt="Please accept cookie policy first"
 ></iframe>
 
 Params:
-@param  data-cookie="true" (required) - the iframe will be consider a cookie.
+@param  data-cookie (required) - the iframe will be consider a cookie.
 @param  data-src (required) - iframe url. From this parameter the iframe "src" will be created.
 @param  data-category (required) - in which category to put the cookie (ex: analytics)
 @param data-placeholder (optional) - it will show an "alt" text while is blocked
@@ -33,7 +33,7 @@ import {
 } from 'lodash';
 
 const OPTIONS = {
-  querySelector: 'iframe[data-cookie="true"]',
+  querySelector: 'iframe[data-cookie]',
   srcSelector: 'data-src',
   categorySelector: 'data-category',
   placeholder: {

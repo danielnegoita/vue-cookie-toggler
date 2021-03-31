@@ -3,9 +3,7 @@
     <gdpr-modal v-if="!isSettings" :toggle-modal="toggleModal">
       <template #header> {{ title }} </template>
 
-      <div>
-        <slot />
-      </div>
+      <slot />
 
       <enable-cookies-alert />
 
@@ -42,9 +40,7 @@
         <template v-else>{{ title }}</template>
       </template>
 
-      <div>
-        <slot name="settingsContent" />
-      </div>
+      <slot name="settingsContent" />
 
       <enable-cookies-alert />
 
@@ -183,7 +179,7 @@ export default {
   },
 
   mounted() {
-    // this.blockCookies();
+    this.blockCookies();
 
     this.init();
   },
@@ -286,12 +282,12 @@ export default {
     },
 
     /**
-     * Add data-gdpr-action="showOptions" to any element on the page to show Privacy Options popup
-     * ex: <a href="#" data-gdpr-action="showOptions">Enable Cookies</a>
+     * Add data-cookie-toggler="settings" to any element on the page to show the Cookie Settings modal
+     * ex: <a href="#" data-cookie-toggler"settings">Cookie settings</a>
      */
     initListeners() {
       let elements = Array.from(
-        document.querySelectorAll('[data-gdpr-action="showOptions"]')
+        document.querySelectorAll('[data-cookie-toggler="settings"]')
       );
 
       forEach(elements, (elem) => {

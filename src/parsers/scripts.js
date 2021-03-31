@@ -1,18 +1,18 @@
 /*
-TODO: maybe improve the way the scripts are updated -@see update() method
+TODO: improve the way the scripts are updated -@see update() method
 
 Usage:
 
 Example 1:
-<script type="text/plain" data-cookie="true" data-category="analytics" src="/path/to/file.js"></script>
+<script type="text/plain" data-cookie data-category="analytics" src="/path/to/file.js"></script>
 
 Example 2:
-<script type="text/plain" data-cookie="true" data-category="essential">
+<script type="text/plain" data-cookie data-category="essential">
     // .. you're awesome code here
 </script>
 
 Params:
-@param  data-cookie="true" (required) - the script will be consider a cookie.
+@param  data-cookie (required) - the script will be consider a cookie.
 @param  data-category (required) - in which category to put the cookie (ex: analytics)
 @param  type="text/plain" (required) - will prevent the browser from executing the script. Latter on it will be changed into type="text/javascript"
  */
@@ -30,7 +30,7 @@ import {
 } from 'lodash';
 
 const OPTIONS = {
-  querySelector: 'script[data-cookie="true"]',
+  querySelector: 'script[data-cookie]',
   typeSelector: 'text/plain',
   categorySelector: 'data-category',
   validation: {

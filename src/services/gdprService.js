@@ -1,7 +1,7 @@
 import { has } from 'lodash';
 
 const EXPIRATION_DAYS = 30;
-const ITEM_NAME = 'vue-cookie-toggler-consent';
+const ITEM_NAME = 'vct-cookie-settings';
 
 export default {
   hasConsent() {

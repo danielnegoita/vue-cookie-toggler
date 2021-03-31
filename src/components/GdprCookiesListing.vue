@@ -101,8 +101,7 @@ export default {
 }
 
 .cookies-consent_list {
-  margin-top: 30px;
-  margin-bottom: 10px;
+  margin-top: 25px;
 }
 .cookie-item {
   border-radius: 3px;
