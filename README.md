@@ -85,6 +85,12 @@ Example 2:
 
 ```
 
+Later, if you want to modify the cookie settings, you can add a link to trigger the cookie settings modal like this:
+
+```html
+<a href="#" data-cookie-toggler"settings">Update cookie settings</a>
+```
+
 ##
 
 ### `cookiesGroups` options:
