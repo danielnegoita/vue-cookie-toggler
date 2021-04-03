@@ -1,6 +1,6 @@
 {
   "name": "vue-cookie-toggler",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "GDPR cookies consent modal.",
   "author": "Daniel Negoita <hello@danielnegoita.com>",
   "license": "MIT",
@@ -16,6 +16,7 @@
     "gdpr",
     "modal",
     "categorize",
+    "block",
     "consent",
     "cookie"
   ],
